@@ -5,18 +5,12 @@ import { fakeAsync } from '@angular/core/testing';
   selector: 'app-taskform',
   imports: [],
   templateUrl: './taskform.html',
-  styleUrl: './taskform.css'
+  styleUrl: './taskform.css',
 })
 export class Taskform {
+  @Output() cancel = new EventEmitter<void>();
 
-@Output() cancel = new EventEmitter<void>();
-
-
-
-
-
-  onCancel(){
-    this.cancel.emit()
+  onCancel() {
+    this.cancel.emit();
   }
-
 }
