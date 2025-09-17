@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Task } from './task/task';
 import { Taskform } from "./taskform/taskform";
+import { type NewTaskData } from './task/task.model';
 
 @Component({
   selector: 'app-tasks',
@@ -48,11 +49,23 @@ export class Tasks {
     this.tasks = this.tasks.filter((task) => task.id !== id);
   }
 
-  onAddTask() {
+  onStartAddTask() {
   this.isAddingTask = true;
   }
 
   onCancelAddTask(){
     this.isAddingTask = false;
+  }
+
+  onAddTask(taskData: NewTaskData){
+    this.tasks.unshift({
+      id: new Date().getTime().toString(),
+      userId: this.userId,
+      title: taskData.title,
+      dueDate: taskData.date,
+      summary: taskData.summary
+    })
+    this.isAddingTask = false;
+
   }
 }
